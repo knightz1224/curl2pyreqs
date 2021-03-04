@@ -21,7 +21,7 @@ Convertion Finished.
 Please open multi_test.py to check the code.
 ```
 
-curl string to python-requests, copyed from Chrome or Firefox:
+Convert a curl string to python-requests, copyed from Chrome or Firefox:
 
 ```Python
 >>> from curl2py import parseCurlString
@@ -29,7 +29,7 @@ curl string to python-requests, copyed from Chrome or Firefox:
 >>> print(output)
 ```
 
-curl file to python-requests, copyed from Chrome or Firefox:
+Convert curl file stream to python-requests, copyed from Chrome or Firefox:
 
 ```Python
 >>> from curl2py import parseCurlFile
