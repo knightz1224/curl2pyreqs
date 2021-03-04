@@ -1,4 +1,4 @@
-# curl2py
+# curl2pyreqs
 
 A library to convert curl to python requests file.
 
