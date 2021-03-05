@@ -15,7 +15,7 @@ Use as binary to export curl request to python script.
 ```Bash
 $ curl2pyreqs -F example.curl
 Convertion Finished.
-Please open multi_test.py to check the code.
+Please open example.py to check the code.
 ```
 
 Convert a curl string to python-requests, copyed from Chrome or Firefox:
