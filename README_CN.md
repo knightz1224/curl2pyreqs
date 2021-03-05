@@ -2,6 +2,10 @@
 
 一款基于 Python 内置库实现的 curl 转换工具，可以直接将 curl 请求转换为使用 python-requests 的 Python 脚本。
 
+## 系统要求
+
+Python 3.8 以上
+
 ## 安装
 
 Windows 下，输入：

@@ -2,6 +2,10 @@
 
 A library to convert curl to python requests file.
 
+## Requirement
+
+Python 3.8 or above
+
 ## Install
 
 ```Bash
