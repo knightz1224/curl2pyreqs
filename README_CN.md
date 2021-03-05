@@ -1,24 +1,32 @@
 # curl2pyreqs
 
-A library to convert curl to python requests file.
+一款基于 Python 内置库实现的 curl 转换工具，可以直接将 curl 请求转换为使用 python-requests 的 Python 脚本。
 
-## Install
+## 安装
 
-```Bash
-$ pip install curl2pyreqs
+Windows 下，输入：
+
+```Shell
+> pip install curl2pyreqs
 ```
 
-## Usage
+MacOS 或 Linux 下，输入：
 
-Use as binary to export curl request to python script.
+```Shell
+$ pip3 install curl2pyreqs
+```
 
-```Bash
+## 使用方法
+
+1. 可以作为程序直接运行转换:
+
+```Shell
 $ curl2pyreqs -F example.curl
 Convertion Finished.
 Please open multi_test.py to check the code.
 ```
 
-Convert a curl string to python-requests, copyed from Chrome or Firefox:
+2. 在 Python 中 import 后，解析从 Chrome 或 Firefox 中获取的 Curl 字符串：
 
 ```Python
 >>> from curl2pyreqs import parseCurlString
@@ -26,7 +34,7 @@ Convert a curl string to python-requests, copyed from Chrome or Firefox:
 >>> print(output)
 ```
 
-Convert curl file stream to python-requests, copyed from Chrome or Firefox:
+3. 或在 Python 中 import 后，解析存有从 Chrome 或 Firefox 中获取的 Curl 字符串的文件：
 
 ```Python
 >>> from curl2pyreqs import parseCurlFile
