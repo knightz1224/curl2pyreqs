@@ -23,7 +23,7 @@ $ pip3 install curl2pyreqs
 ```Shell
 $ curl2pyreqs -F example.curl
 Convertion Finished.
-Please open example.curl to check the code.
+Please open example.py to check the code.
 ```
 
 2. 在 Python 中 import 后，解析从 Chrome 或 Firefox 中获取的 Curl 字符串：
