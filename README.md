@@ -34,4 +34,6 @@ Convert curl file stream to python-requests, copyed from Chrome or Firefox:
 >>> print(output)
 ```
 
-[中文版](https://github.com/knightz1224/curl2pyreqs/blob/main/README_CN.md)
+## README_CN
+
+[中文版说明](https://github.com/knightz1224/curl2pyreqs/blob/main/README_CN.md)
