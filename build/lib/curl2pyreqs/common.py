@@ -5,13 +5,7 @@ from .ulti import *
 
 
 def main(**kwags):
-    _opts = [
-        'file',
-    ]
-    _s_opts = 'F'
+    _opts = ['file', 'copy']
+    _s_opts = 'FC'
     opt, arg = getopt.getopt(sys.argv[1:], _s_opts, _opts)
-    if ('-F' in opt[0]) and arg:
-        filepath = arg[0]
-        parseCurlFile(filepath=filepath)
-    else:
-        print('Usage:\n\tcurl2pyreqs -F requests.curl')
+    print(convert_main(opt, arg))
