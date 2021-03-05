@@ -2,16 +2,13 @@
 
 A library to convert curl to python requests file.
 
-
-Install
------
+## Install
 
 ```Bash
 $ pip install curl2pyreqs
 ```
 
-Usage
------
+## Usage
 
 Use as binary to export curl request to python script.
 
@@ -36,4 +33,3 @@ Convert curl file stream to python-requests, copyed from Chrome or Firefox:
 >>> output = parseCurlFile('./example.curl')
 >>> print(output)
 ```
-
