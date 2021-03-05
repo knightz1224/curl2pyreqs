@@ -1,6 +1,6 @@
 # curl2pyreqs
 
-一款基于 Python 内置库实现的 curl 转换工具，可以直接将 curl 请求转换为使用 python-requests 的 Python 脚本。
+一款基于 Python 实现的 curl 转换工具，可以直接将 curl 请求转换为使用 python-requests 的 Python 脚本。
 
 ## 系统要求
 
