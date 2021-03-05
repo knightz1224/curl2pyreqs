@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: curl2pyreqs
-Version: 0.1.0
+Version: 0.1.1
 Summary: A Library to Convert Curl to Python Requests File
 Home-page: https://github.com/knightz1224/curl2pyreqs
 Author: ZHANG HJ
@@ -10,6 +10,21 @@ Description: # curl2pyreqs
         
         A library to convert curl to python requests file.
         
+        ## Requirement
+        
+        Python >= 3.8
+        
+        pyperclip >= 1.8.0
+        
+        On Linux, xclip or xsel needed:
+        
+        ```Shell
+        sudo apt-get install xclip
+        or
+        sudo apt-get install xsel
+        
+        ```
+        
         ## Install
         
         ```Bash
@@ -18,15 +33,27 @@ Description: # curl2pyreqs
         
         ## Usage
         
-        Use as binary to export curl request to python script.
+        ### Use as binary
+        
+        -   Export curl request file to python script.
         
         ```Bash
         $ curl2pyreqs -F example.curl
         Convertion Finished.
-        Please open multi_test.py to check the code.
+        Please open example.py to check the code.
         ```
         
-        Convert a curl string to python-requests, copyed from Chrome or Firefox:
+        -   Convert curl request in the clipboard and paste the requests code back
+        
+        ```Bash
+        $ curl2pyreqs
+        Convertion Finished.
+        Now requests code is copyed in your clipboard.
+        ```
+        
+        ### Use by importing
+        
+        -   Convert a curl string to python-requests, copyed from Chrome or Firefox:
         
         ```Python
         >>> from curl2pyreqs import parseCurlString
@@ -34,13 +61,17 @@ Description: # curl2pyreqs
         >>> print(output)
         ```
         
-        Convert curl file stream to python-requests, copyed from Chrome or Firefox:
+        -   Convert curl file stream to python-requests, copyed from Chrome or Firefox:
         
         ```Python
         >>> from curl2pyreqs import parseCurlFile
         >>> output = parseCurlFile('./example.curl')
         >>> print(output)
         ```
+        
+        ## README_CN
+        
+        [中文版说明](https://github.com/knightz1224/curl2pyreqs/blob/main/README_CN.md)
         
 Platform: any
 Classifier: Programming Language :: Python :: 3

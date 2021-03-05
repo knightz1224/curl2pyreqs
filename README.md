@@ -4,7 +4,18 @@ A library to convert curl to python requests file.
 
 ## Requirement
 
-Python 3.8 or above
+Python >= 3.8
+
+pyperclip >= 1.8.0
+
+On Linux, xclip or xsel needed:
+
+```Shell
+sudo apt-get install xclip
+or
+sudo apt-get install xsel
+
+```
 
 ## Install
 
@@ -14,7 +25,9 @@ $ pip install curl2pyreqs
 
 ## Usage
 
-Use as binary to export curl request to python script.
+### Use as binary
+
+-   Export curl request file to python script.
 
 ```Bash
 $ curl2pyreqs -F example.curl
@@ -22,7 +35,17 @@ Convertion Finished.
 Please open example.py to check the code.
 ```
 
-Convert a curl string to python-requests, copyed from Chrome or Firefox:
+-   Convert curl request in the clipboard and paste the requests code back
+
+```Bash
+$ curl2pyreqs
+Convertion Finished.
+Now requests code is copyed in your clipboard.
+```
+
+### Use by importing
+
+-   Convert a curl string to python-requests, copyed from Chrome or Firefox:
 
 ```Python
 >>> from curl2pyreqs import parseCurlString
@@ -30,7 +53,7 @@ Convert a curl string to python-requests, copyed from Chrome or Firefox:
 >>> print(output)
 ```
 
-Convert curl file stream to python-requests, copyed from Chrome or Firefox:
+-   Convert curl file stream to python-requests, copyed from Chrome or Firefox:
 
 ```Python
 >>> from curl2pyreqs import parseCurlFile

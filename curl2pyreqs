@@ -11,4 +11,3 @@ if sys.version_info[0] == 3:
         curl2pyreqs.main(repo_path=_filepath)
 else:
     print("[fatal] Python 3 is required!")
-    print("try to run this script using 'python3 you-get'.")

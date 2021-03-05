@@ -9,5 +9,6 @@ src/curl2pyreqs.egg-info/PKG-INFO
 src/curl2pyreqs.egg-info/SOURCES.txt
 src/curl2pyreqs.egg-info/dependency_links.txt
 src/curl2pyreqs.egg-info/entry_points.txt
+src/curl2pyreqs.egg-info/requires.txt
 src/curl2pyreqs.egg-info/top_level.txt
 src/curl2pyreqs.egg-info/zip-safe

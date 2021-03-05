@@ -4,7 +4,17 @@
 
 ## 系统要求
 
-Python 3.8 以上
+Python >= 3.8
+
+pyperclip >= 1.8.0
+
+Linux 环境下需要安装 xclip 或 xsel 库
+
+```Shell
+sudo apt-get install xclip
+or
+sudo apt-get install xsel
+```
 
 ## 安装
 
@@ -22,7 +32,9 @@ $ pip3 install curl2pyreqs
 
 ## 使用方法
 
-1. 可以作为程序直接运行转换:
+### 作为程序直接运行
+
+-   将存有 curl 请求的文本文件转换为 Python 文件
 
 ```Shell
 $ curl2pyreqs -F example.curl
@@ -30,7 +42,17 @@ Convertion Finished.
 Please open example.py to check the code.
 ```
 
-2. 在 Python 中 import 后，解析从 Chrome 或 Firefox 中获取的 Curl 字符串：
+-   读取剪贴板里的 curl 请求，转换为 Python 代码
+
+```Shell
+$ curl2pyreqs -F example.curl
+Convertion Finished.
+Please open example.py to check the code.
+```
+
+### 通过 import
+
+-   解析从 Chrome 或 Firefox 中获取的 Curl 字符串：
 
 ```Python
 >>> from curl2pyreqs import parseCurlString
@@ -38,7 +60,7 @@ Please open example.py to check the code.
 >>> print(output)
 ```
 
-3. 或在 Python 中 import 后，解析存有从 Chrome 或 Firefox 中获取的 Curl 字符串的文件：
+-   解析存有从 Chrome 或 Firefox 中获取的 Curl 字符串的文件：
 
 ```Python
 >>> from curl2pyreqs import parseCurlFile
