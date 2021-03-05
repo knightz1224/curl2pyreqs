@@ -33,3 +33,5 @@ Convert curl file stream to python-requests, copyed from Chrome or Firefox:
 >>> output = parseCurlFile('./example.curl')
 >>> print(output)
 ```
+
+[中文版](https://github.com/knightz1224/curl2pyreqs/blob/main/README_CN.md)
