@@ -55,7 +55,7 @@ Please open example.py to check the code.
 -   解析从 Chrome 或 Firefox 中获取的 Curl 字符串：
 
 ```Python
->>> from curl2pyreqs import parseCurlString
+>>> from curl2pyreqs.ulti import parseCurlString
 >>> output = parseCurlString("""curl -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:87.0) Gecko/20100101 Firefox/87.0' -H 'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8' -H 'accept-language: en-US,en;q=0.5' --compressed -H 'upgrade-insecure-requests: 1' -H 'te: trailers' https://pypi.org/""")
 >>> print(output)
 ```
@@ -63,7 +63,7 @@ Please open example.py to check the code.
 -   解析存有从 Chrome 或 Firefox 中获取的 Curl 字符串的文件：
 
 ```Python
->>> from curl2pyreqs import parseCurlFile
+>>> from curl2pyreqs.ulti import parseCurlFile
 >>> output = parseCurlFile('./example.curl')
 >>> print(output)
 ```
