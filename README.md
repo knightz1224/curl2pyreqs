@@ -31,9 +31,9 @@ $ pip install curl2pyreqs
 
 ```Bash
 $ curl2pyreqs -F example.curl
-Convertion Finished.
-Please open example.py to check the code.
 ```
+
+![curl2pyreqs0.2.0](https://gitee.com/knightz1224/blog/raw/master/curl2pyreqs-0.2.0.gif)
 
 -   Convert curl request in the clipboard and paste the requests code back
 
