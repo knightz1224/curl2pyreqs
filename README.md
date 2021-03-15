@@ -4,9 +4,11 @@ A library to convert curl to python requests file.
 
 ## Requirement
 
-Python >= 3.8
+Python >= 3.6
 
 pyperclip >= 1.8.0
+
+rich >= 9.13.0
 
 On Linux, xclip or xsel needed:
 

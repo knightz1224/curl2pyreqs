@@ -4,9 +4,11 @@
 
 ## 系统要求
 
-Python >= 3.8
+Python >= 3.6
 
 pyperclip >= 1.8.0
+
+rich >= 9.13.0
 
 Linux 环境下需要安装 xclip 或 xsel 库
 

@@ -6,6 +6,25 @@ import re
 import shlex
 from collections import OrderedDict
 import pyperclip
+from rich.syntax import Syntax
+from rich.console import Console
+import locale
+from os import get_terminal_size
+
+
+def prettier_print(code: str):
+    syntax = Syntax(code, "python", theme="monokai", line_numbers=True)
+    console = Console()
+    console_width = int((get_terminal_size()[0] - 36) / 2)
+    console.print("=" * console_width +
+                  "[bold magenta] Python Requests Code Preview Start [/]" +
+                  "=" * console_width,
+                  justify='center')
+    console.print(syntax)
+    console.print("=" * console_width +
+                  "[bold magenta]  Python Requests Code Preview End  [/]" +
+                  "=" * console_width,
+                  justify='center')
 
 
 def parse_content_type(content_type: str):
@@ -103,7 +122,7 @@ def prettier_tuple(the_tuple, indent=4):
     if not the_tuple:
         return "()"
     return '(\n' + " " * indent + ("," + "\n" + " " * indent).join(
-        str(i) for i in the_tuple) + '\n)'
+        str(i) for i in the_tuple) + ',\n)'
 
 
 def curl_replace(curl_cmd):
@@ -136,14 +155,14 @@ class parseCurlCommand:
         cookie_string = ''
         content_type = ''
         if headers:
-            self.headers = dict([
-                re.findall(r'([\s\S]*): ([\s\S]*)', unquote(header.strip()))[0]
-                for header in headers if 'Cookie' not in header
-            ])
-            if header_cookie := [
-                    header for header in headers if 'Cookie' in header
-            ]:
-                cookie_string = header_cookie[0]
+            self.headers = dict(
+                [tuple(header.split(': ', 1)) for header in headers])
+            cookie_string = self.headers.get('cookie') or self.headers.get(
+                'Cookie')
+            if 'cookie' in self.headers:
+                self.headers.pop('cookie')
+            if 'Cookie' in self.headers:
+                self.headers.pop('Cookie')
             content_type = self.headers.get(
                 'Content-Type') or self.headers.get('content-type')
         else:
@@ -223,16 +242,39 @@ def parseCurlFile(filepath):
 
 
 def convert_main(opt, arg):
+    result_type = {
+        0: {
+            'en':
+            'Convertion Finished.\nNow requests code is copyed in your clipboard.',
+            'zh': '转换已完成\n现在python-requests代码已经复制到了剪贴板中。'
+        },
+        1: {
+            'en': 'Please copy the curl before run.',
+            'zh': '运行前请先从浏览器中复制curl请求。'
+        },
+        2: {
+            'en':
+            'Usage:\n\tCurl File Convert -- curl2pyreqs -F requests.curl\n\tClipboard Convert -- curl2pyreqs',
+            'zh':
+            '使用方法:\n\tcurl文件转换 -- curl2pyreqs -F requests.curl\n\t剪贴板转换 -- curl2pyreqs'
+        }
+    }
+    lang = 'en'
+    sys_lang_info = locale.getdefaultlocale()
+    if sys_lang_info:
+        if 'zh' in sys_lang_info[0]:
+            lang = 'zh'
     if opt:
         if ('-F' in opt[0]) and arg:
             filepath = arg[0]
-            return parseCurlFile(filepath=filepath)
+            return 'green', parseCurlFile(filepath=filepath)
     else:
         clip = str(pyperclip.paste())
         if clip.find('curl ') == 0:
             output = parseCurlString(clip)
             pyperclip.copy(output)
-            return 'Convertion Finished.\nNow requests code is copyed in your clipboard.'
+            prettier_print(output)
+            return 'green', result_type[0][lang]
         else:
-            return 'Please copy the curl before run.'
-    return 'Usage:\n\tCurl File Convert -- curl2pyreqs -F requests.curl\n\tClipboard Convert -- curl2pyreqs -C'
+            return 'yellow', result_type[1][lang]
+    return 'red', result_type[2][lang]

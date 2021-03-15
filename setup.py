@@ -9,7 +9,7 @@ project_info = {
     "name":
     "curl2pyreqs",
     "version":
-    "0.1.1",
+    "0.2.0",
     "author":
     "ZHANG HJ",
     "author_email":
@@ -22,7 +22,7 @@ project_info = {
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License"
     ],
-    'requires': ['pyperclip>=1.8.0'],
+    'requires': ['pyperclip>=1.8.0', 'rich >= 9.13.0'],
     "description":
     "A Library to Convert Curl to Python Requests File",
     "console_scripts": ["curl2pyreqs = curl2pyreqs.__main__:main"]
@@ -49,4 +49,4 @@ setup(name=project_info['name'],
       platforms='any',
       zip_safe=True,
       entry_points={'console_scripts': project_info['console_scripts']},
-      python_requires=">=3.8")
+      python_requires=">=3.6")
