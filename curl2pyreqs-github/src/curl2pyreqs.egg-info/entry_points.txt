@@ -1,0 +1,3 @@
+[console_scripts]
+curl2pyreqs = curl2pyreqs.__main__:main
+

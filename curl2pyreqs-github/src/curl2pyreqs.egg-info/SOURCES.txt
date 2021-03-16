@@ -1,0 +1,14 @@
+README.md
+pyproject.toml
+setup.py
+src/curl2pyreqs/__init__.py
+src/curl2pyreqs/__main__.py
+src/curl2pyreqs/common.py
+src/curl2pyreqs/ulti.py
+src/curl2pyreqs.egg-info/PKG-INFO
+src/curl2pyreqs.egg-info/SOURCES.txt
+src/curl2pyreqs.egg-info/dependency_links.txt
+src/curl2pyreqs.egg-info/entry_points.txt
+src/curl2pyreqs.egg-info/requires.txt
+src/curl2pyreqs.egg-info/top_level.txt
+src/curl2pyreqs.egg-info/zip-safe
