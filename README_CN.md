@@ -40,8 +40,6 @@ $ pip3 install curl2pyreqs
 
 ```Shell
 $ curl2pyreqs -F example.curl
-Convertion Finished.
-Please open example.py to check the code.
 ```
 
 -   读取剪贴板里的 curl 请求，转换为 Python 代码
