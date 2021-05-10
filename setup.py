@@ -9,7 +9,7 @@ project_info = {
     "name":
     "curl2pyreqs",
     "version":
-    "0.2.0",
+    "0.3.0",
     "author":
     "ZHANG HJ",
     "author_email":

@@ -61,7 +61,10 @@ def parse_multi(content_type, the_data):
         for i in the_data.split(b"--" + boundary):
             p = i.replace(b'\\x0d', b'\r')
             p = p.replace(b'\\x0a', b'\n')
+            p = p.replace(b'\\n', b'\n')
+            p = p.replace(b'\\r', b'\r')
             parts = p.splitlines()
+            print(parts)
             if len(parts) > 1 and parts[0][0:2] != b"--":
                 if len(parts) > 4:
                     tmp_value = {}
@@ -200,6 +203,7 @@ class parseCurlCommand:
 
 def parseCurlString(filestring, output_path=''):
     curl_cmd = parseCurlCommand(filestring)
+    print(curl_cmd.data)
     output = 'import requests\n\n'
     req = ['response = requests.{}("{}"'.format(curl_cmd.method, curl_cmd.url)]
     if curl_cmd.params:
