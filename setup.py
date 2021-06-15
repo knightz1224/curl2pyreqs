@@ -4,12 +4,13 @@ PROJECT_NAME = 'curl2pyreqs'
 PACKAGE_NAME = 'curl2pyreqs'
 
 import os
+
 here = os.path.abspath(os.path.dirname(__file__))
 project_info = {
     "name":
     "curl2pyreqs",
     "version":
-    "0.3.0",
+    "0.4.0",
     "author":
     "ZHANG HJ",
     "author_email":
@@ -32,7 +33,8 @@ try:
 except:
     README = ""
 
-from setuptools import setup, find_packages
+from setuptools import find_packages, setup
+
 setup(name=project_info['name'],
       version=project_info['version'],
       author=project_info['author'],

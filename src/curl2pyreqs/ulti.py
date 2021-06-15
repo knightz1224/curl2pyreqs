@@ -1,18 +1,19 @@
 #!/bin/env python3
-from urllib.parse import urlparse, unquote
-import json
 import argparse
+import json
+import locale
 import re
 import shlex
 from collections import OrderedDict
+from urllib.parse import unquote, urlparse
+
 import pyperclip
-from rich.syntax import Syntax
 from rich.console import Console
-import locale
-from os import get_terminal_size
+from rich.syntax import Syntax
 
 
 def prettier_print(code: str):
+    from os import get_terminal_size
     syntax = Syntax(code, "python", theme="monokai", line_numbers=True)
     console = Console()
     console_width = int((get_terminal_size()[0] - 36) / 2)
@@ -64,7 +65,7 @@ def parse_multi(content_type, the_data):
             p = p.replace(b'\\n', b'\n')
             p = p.replace(b'\\r', b'\r')
             parts = p.splitlines()
-            print(parts)
+            # print(parts)
             if len(parts) > 1 and parts[0][0:2] != b"--":
                 if len(parts) > 4:
                     tmp_value = {}
@@ -132,7 +133,7 @@ def curl_replace(curl_cmd):
     curl_replace = [(r'\\\r|\\\n|\r|\n', ''), (' -XPOST', ' -X POST'),
                     (' -XGET', ' -X GET'), (' -XPUT', ' -X PUT'),
                     (' -XPATCH', ' -X PATCH'), (' -XDELETE', ' -X DELETE'),
-                    (' -Xnull', '')]
+                    (' -Xnull', ''), (' \$', ' ')]
     tmp_curl_cmd = curl_cmd
     for pattern in curl_replace:
         tmp_curl_cmd = re.sub(pattern[0], pattern[1], tmp_curl_cmd)
@@ -167,7 +168,8 @@ class parseCurlCommand:
             if 'Cookie' in self.headers:
                 self.headers.pop('Cookie')
             content_type = self.headers.get(
-                'Content-Type') or self.headers.get('content-type')
+                'Content-Type') or self.headers.get(
+                    'content-type') or self.headers.get('Content-type')
         else:
             self.headers = {}
         if self.arguments.cookie:
@@ -190,8 +192,10 @@ class parseCurlCommand:
         if self.arguments.X:
             self.method = self.arguments.X.lower()
         if cookie_string:
-            self.cookies = dict(
-                re.findall(r' ([^=\s]*)=([^;]*)', cookie_string))
+            self.cookies = {}
+            for cookie in re.findall(r'([^=\s;]*)=([^;]*)', cookie_string):
+                if cookie[0] not in self.cookies:
+                    self.cookies[cookie[0]] = cookie[1]
         if self.arguments.insecure:
             self.insecure = True
         else:
@@ -203,7 +207,7 @@ class parseCurlCommand:
 
 def parseCurlString(filestring, output_path=''):
     curl_cmd = parseCurlCommand(filestring)
-    print(curl_cmd.data)
+    # print(curl_cmd.data)
     output = 'import requests\n\n'
     req = ['response = requests.{}("{}"'.format(curl_cmd.method, curl_cmd.url)]
     if curl_cmd.params:
@@ -245,7 +249,7 @@ def parseCurlFile(filepath):
         filepath.replace('curl', 'py'))
 
 
-def convert_main(opt, arg):
+def convert_main(**kwargs):
     result_type = {
         0: {
             'en':
@@ -268,17 +272,17 @@ def convert_main(opt, arg):
     if sys_lang_info:
         if 'zh' in sys_lang_info[0]:
             lang = 'zh'
-    if opt:
-        if ('-F' in opt[0]) and arg:
-            filepath = arg[0]
-            return 'green', parseCurlFile(filepath=filepath)
+    if filepath := kwargs['file']:
+        return 'green', parseCurlFile(filepath=filepath)
     else:
         clip = str(pyperclip.paste())
         if clip.find('curl ') == 0:
             output = parseCurlString(clip)
             pyperclip.copy(output)
-            prettier_print(output)
+            if not kwargs['clean']:
+                prettier_print(output)
+            else:
+                print(output)
             return 'green', result_type[0][lang]
         else:
             return 'yellow', result_type[1][lang]
-    return 'red', result_type[2][lang]
