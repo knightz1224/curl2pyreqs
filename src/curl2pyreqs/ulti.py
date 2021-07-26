@@ -130,6 +130,18 @@ def prettier_tuple(the_tuple, indent=4):
         str(i) for i in the_tuple) + ',\n)'
 
 
+def quotestr(x):
+    return f"'{x}'"
+
+
+def prettier_dict_string(the_dict, indent=4):
+    if not the_dict:
+        return "{}"
+    return '{\n' + " " * indent + ("," + "\n" + " " * indent).join(
+        f"{quotestr(x) if isinstance(x,str) else str(x)}:{quotestr(y) if isinstance(y,str) else str(y)}"
+        for x, y in the_dict.items()) + ',\n}'
+
+
 def curl_replace(curl_cmd):
     curl_replace = [(r'\\\r|\\\n|\r|\n', ''), (' -XPOST', ' -X POST'),
                     (' -XGET', ' -X GET'), (' -XPUT', ' -X PUT'),
@@ -168,7 +180,7 @@ class parseCurlCommand:
                 self.headers.pop('cookie')
             if 'Cookie' in self.headers:
                 self.headers.pop('Cookie')
-            content_type = self.headers.get(
+            self.content_type = self.headers.get(
                 'Content-Type') or self.headers.get(
                     'content-type') or self.headers.get('Content-type')
         else:
@@ -176,11 +188,16 @@ class parseCurlCommand:
         if self.arguments.cookie:
             cookie_string = self.arguments.cookie
         if post_data and not self.arguments.get:
+            # print(post_data)
             self.method = 'post'
-            if "multipart/form-data" in content_type.lower():
+            if "multipart/form-data" in self.content_type.lower():
+                # print(self.content_type)
                 self.data = parse_multi(
-                    content_type,
+                    self.content_type,
                     unquote(post_data.strip('$')).encode('raw_unicode_escape'))
+                # print(self.data)
+            elif "application/json" in self.content_type.lower():
+                self.data = json.loads(post_data)
             else:
                 self.data = dict(
                     re.findall(r'([^=&]*)=([^&]*)', unquote(post_data)))
@@ -190,6 +207,7 @@ class parseCurlCommand:
             self.data = {}
         else:
             self.data = {}
+        # print(self.data)
         if self.arguments.X:
             self.method = self.arguments.X.lower()
         if cookie_string:
@@ -216,7 +234,11 @@ def parseCurlString(filestring, output_path=''):
         req.append('params=params')
     if curl_cmd.data:
         if isinstance(curl_cmd.data, dict):
-            output += "data = {}\n\n".format(prettier_dict(curl_cmd.data))
+            if 'application/json' in curl_cmd.content_type:
+                output += "data = json.dumps({})\n\n".format(
+                    prettier_dict_string(curl_cmd.data))
+            else:
+                output += "data = {}\n\n".format(prettier_dict(curl_cmd.data))
         else:
             output = 'from requests_toolbelt import MultipartEncoder\n' + output
             output += "data = {}\n\n".format(format_multi(curl_cmd.data))

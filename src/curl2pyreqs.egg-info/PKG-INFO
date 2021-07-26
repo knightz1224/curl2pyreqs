@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: curl2pyreqs
-Version: 0.4.0
+Version: 0.4.1
 Summary: A Library to Convert Curl to Python Requests File
 Home-page: https://github.com/knightz1224/curl2pyreqs
 Author: ZHANG HJ
