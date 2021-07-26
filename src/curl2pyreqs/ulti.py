@@ -117,6 +117,7 @@ def prettier_dict(the_dict, indent=4):
         return "{}"
     return ("\n" + " " * indent).join(
         json.dumps(the_dict,
+                   ensure_ascii=False,
                    sort_keys=True,
                    indent=indent,
                    separators=(',', ': ')).splitlines())
